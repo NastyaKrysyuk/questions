@@ -5,13 +5,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Controller, useFormContext } from "react-hook-form";
 import dayjs from "dayjs";
 
-export const FormInputDataPicker = ({ name, label }) => {
+export const FormInputDataPicker = ({ name, label, rules }) => {
   const { control } = useFormContext();
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Controller
         name={name}
         control={control}
+        rules={rules}
         render={({ field: { onChange, value } }) => (
           <DatePicker
             onChange={(date) => {

@@ -6,6 +6,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 
 export const FormInputRadio = ({ name, label, options }) => {
@@ -16,21 +17,24 @@ export const FormInputRadio = ({ name, label, options }) => {
       <Controller
         name={name}
         control={control}
-        render={({
-          field: { onChange, value },
-          fieldState: { error },
-          formState,
-        }) => (
-          <RadioGroup value={value} onChange={onChange}>
-            {options.map((singleOption) => (
-              <FormControlLabel
-                key={singleOption.id}
-                value={singleOption.value}
-                label={singleOption.label}
-                control={<Radio />}
-              />
-            ))}
-          </RadioGroup>
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <>
+            <RadioGroup value={value} onChange={onChange}>
+              {options.map((singleOption) => (
+                <FormControlLabel
+                  key={singleOption.value}
+                  value={singleOption.value}
+                  label={singleOption.label}
+                  control={<Radio />}
+                />
+              ))}
+            </RadioGroup>
+            {error && (
+              <FormHelperText style={{ color: "red" }}>
+                {error.message}
+              </FormHelperText>
+            )}
+          </>
         )}
       />
     </FormControl>
